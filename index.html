@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Suraj Gupta | Motion Graphics & AI Video Creator</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #080808;
+  --bg2: #0e0e0e;
+  --bg3: #141414;
+  --gold: #c9a84c;
+  --gold2: #e8c97a;
+  --white: #f0ede6;
+  --muted: #6b6660;
+  --border: rgba(201,168,76,0.15);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  width: 10px; height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed; top:0; left:0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  position: fixed; top:0; left:0;
+  pointer-events: none;
+  z-index: 9998;
+  transition: all 0.18s ease;
+  opacity: 0.5;
+}
+
+/* GRAIN OVERLAY */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.4;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; left:0; right:0;
+  z-index: 100;
+  padding: 24px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.4s, backdrop-filter 0.4s, padding 0.3s;
+}
+nav.scrolled {
+  background: rgba(8,8,8,0.92);
+  backdrop-filter: blur(20px);
+  padding: 16px 60px;
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: var(--white);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links {
+  display: flex; align-items: center; gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--gold);
+  padding: 10px 24px;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+}
+.nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
+
+/* ── TICKER ── */
+.ticker {
+  position: relative;
+  overflow: hidden;
+  background: var(--gold);
+  padding: 10px 0;
+  margin-top: 72px;
+}
+.ticker-track {
+  display: flex; gap: 0;
+  animation: ticker 18s linear infinite;
+  width: max-content;
+}
+.ticker-track span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: var(--bg);
+  padding: 0 32px;
+  white-space: nowrap;
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── HERO ── */
+#home {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 80px 60px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg-text {
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(120px, 22vw, 320px);
+  color: rgba(201,168,76,0.03);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: -5px;
+  user-select: none;
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.hero-left {}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 28px;
+}
+.hero-eyebrow-dot {
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform: scale(1); }
+  50% { opacity:0.5; transform: scale(0.7); }
+}
+.hero-eyebrow span {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.hero-h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(70px, 9vw, 130px);
+  line-height: 0.92;
+  letter-spacing: 2px;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+.hero-h1 em {
+  font-style: normal;
+  color: var(--gold);
+  -webkit-text-stroke: 0px;
+}
+.hero-sub {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 420px;
+  margin-bottom: 48px;
+}
+.hero-sub strong { color: var(--white); font-weight: 500; }
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  background: var(--gold); color: var(--bg);
+  padding: 14px 32px; text-decoration: none;
+  transition: all 0.3s;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--gold2); transform: translateY(-2px); }
+.btn-secondary {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  border: 1px solid var(--border);
+  color: var(--muted); padding: 14px 32px;
+  text-decoration: none; transition: all 0.3s;
+  display: inline-block;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+.hero-right {
+  display: flex; flex-direction: column; gap: 20px;
+  align-items: flex-end;
+}
+.hero-stats {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+  width: 100%;
+}
+.hero-stat {
+  background: var(--bg2);
+  padding: 28px 20px;
+  text-align: center;
+}
+.hero-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px; color: var(--gold);
+  letter-spacing: 2px; line-height: 1;
+  margin-bottom: 6px;
+}
+.hero-stat-label {
+  font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted);
+}
+.hero-roles {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  padding: 24px;
+}
+.hero-roles-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 16px;
+}
+.role-item {
+  display: flex; align-items: center;
+  gap: 12px; padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px; color: var(--white);
+  font-weight: 400;
+}
+.role-item:last-child { border-bottom: none; }
+.role-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px; color: var(--gold);
+  letter-spacing: 1px; min-width: 24px;
+}
+
+/* ── SECTIONS COMMON ── */
+section { padding: 120px 60px; }
+.section-inner { max-width: 1400px; margin: 0 auto; }
+.section-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 16px;
+}
+.section-label::before {
+  content: ''; width: 40px; height: 1px; background: var(--gold);
+}
+.section-h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 6vw, 88px);
+  line-height: 0.95;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+
+/* ── ANIMATED BANNER ── */
+.type-banner {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 60px;
+  text-align: center;
+  overflow: hidden;
+}
+.type-banner-inner {
+  max-width: 1400px; margin: 0 auto;
+}
+.type-line {
+  font-family: 'Bebas Neue', sans-serif;
+  display: block;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: revealLine 0.7s forwards;
+}
+.type-line:nth-child(1) { font-size: clamp(40px,7vw,100px); color: var(--white); animation-delay: 0.1s; }
+.type-line:nth-child(2) { font-size: clamp(40px,7vw,100px); color: var(--gold); animation-delay: 0.3s; }
+.type-line:nth-child(3) { font-size: clamp(40px,7vw,100px); color: var(--white); animation-delay: 0.5s; }
+@keyframes revealLine {
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* ── ABOUT ── */
+#about { background: var(--bg); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px; align-items: start;
+}
+.about-left {}
+.profile-box {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 40px;
+  margin-bottom: 24px;
+}
+.profile-avatar {
+  width: 100%; aspect-ratio: 3/4;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+  position: relative; overflow: hidden;
+}
+.profile-avatar::after {
+  content: 'YOUR PHOTO';
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; letter-spacing: 3px;
+  color: var(--muted); text-transform: uppercase;
+}
+.profile-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px; letter-spacing: 3px;
+  color: var(--white); margin-bottom: 4px;
+}
+.profile-role {
+  font-size: 12px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px;
+}
+.profile-detail {
+  font-size: 12px; color: var(--muted);
+  padding: 8px 0; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between;
+}
+.profile-detail span { color: var(--white); font-size: 12px; }
+
+.about-right {}
+.about-right .section-h2 { margin-bottom: 32px; }
+.about-body {
+  font-size: 15px; line-height: 1.9;
+  color: rgba(240,237,230,0.65);
+  margin-bottom: 20px;
+}
+.about-body strong { color: var(--white); font-weight: 500; }
+.about-highlight {
+  border-left: 2px solid var(--gold);
+  padding: 20px 28px;
+  margin: 36px 0;
+  background: var(--bg2);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--white);
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* EXPERIENCE */
+.exp-timeline { margin-top: 48px; }
+.exp-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 24px;
+}
+.exp-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+}
+.exp-year {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px; letter-spacing: 2px;
+  color: var(--gold); padding-top: 3px;
+}
+.exp-company {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--white); margin-bottom: 4px;
+}
+.exp-role {
+  font-size: 12px; color: var(--gold);
+  letter-spacing: 1px; margin-bottom: 8px;
+}
+.exp-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ── SKILLS ── */
+#skills { background: var(--bg2); }
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 60px;
+}
+.skill-group {
+  background: var(--bg);
+  padding: 40px;
+}
+.skill-group-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-tag {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 1px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 7px 14px;
+  transition: all 0.3s;
+}
+.skill-tag:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201,168,76,0.05);
+}
+
+/* ── WORK ── */
+#work { background: var(--bg); }
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px; background: var(--border);
+  margin-top: 60px;
+}
+.project-card {
+  background: var(--bg2);
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+  text-decoration: none;
+  display: block;
+}
+.project-card:hover { background: var(--bg3); }
+.project-card::before {
+  content: '';
+  position: absolute; top:0; left:0; right:0;
+  height: 2px; background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.project-card:hover::before { transform: scaleX(1); }
+.project-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 64px; color: rgba(201,168,76,0.08);
+  position: absolute; top: 24px; right: 32px;
+  line-height: 1; pointer-events: none;
+}
+.project-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 16px;
+}
+.project-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px; letter-spacing: 2px;
+  color: var(--white); margin-bottom: 16px;
+  line-height: 1;
+}
+.project-desc {
+  font-size: 13px; line-height: 1.7;
+  color: var(--muted); margin-bottom: 28px;
+  max-width: 380px;
+}
+.project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+.project-tag {
+  font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  color: var(--muted); padding: 5px 12px;
+  font-family: 'Syne', sans-serif; font-weight: 600;
+}
+.project-link {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold);
+  display: flex; align-items: center; gap: 8px;
+  transition: gap 0.3s;
+}
+.project-card:hover .project-link { gap: 14px; }
+
+/* ── CLIENT WORK ── */
+#clients { background: var(--bg2); }
+.clients-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-end; margin-bottom: 60px;
+  flex-wrap: wrap; gap: 24px;
+}
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px; background: var(--border);
+}
+.client-card {
+  background: var(--bg);
+  padding: 40px;
+  transition: background 0.3s;
+}
+.client-card:hover { background: var(--bg3); }
+.client-thumb {
+  width: 100%; aspect-ratio: 16/9;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+  display: flex; align-items: center; justify-content: center;
+}
+.client-thumb-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px; letter-spacing: 2px;
+  color: var(--muted); text-transform: uppercase;
+}
+.client-industry {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 10px;
+}
+.client-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 700;
+  color: var(--white); margin-bottom: 10px;
+}
+.client-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+.client-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+.client-tool {
+  font-size: 9px; letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted); background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  font-family: 'Syne', sans-serif;
+}
+
+/* INDUSTRIES STRIP */
+.industries {
+  margin-top: 60px;
+  border: 1px solid var(--border);
+  padding: 32px 40px;
+  background: var(--bg);
+}
+.ind-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px;
+}
+.ind-tags { display: flex; flex-wrap: wrap; gap: 12px; }
+.ind-tag {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 1px; color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  transition: all 0.3s;
+}
+.ind-tag:hover { color: var(--gold); border-color: var(--gold); }
+
+/* CTA STRIP */
+.cta-strip {
+  background: var(--gold);
+  padding: 60px;
+  text-align: center;
+}
+.cta-strip-h {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 5vw, 64px);
+  color: var(--bg); letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+.cta-strip-sub { color: rgba(8,8,8,0.6); font-size: 14px; margin-bottom: 28px; }
+.btn-dark {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  background: var(--bg); color: var(--gold);
+  padding: 14px 36px; text-decoration: none;
+  display: inline-block; transition: all 0.3s;
+}
+.btn-dark:hover { background: #1a1a1a; transform: translateY(-2px); }
+
+/* ── CONTACT ── */
+#contact { background: var(--bg); padding: 120px 60px; }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start;
+}
+.contact-left .section-h2 { margin-bottom: 20px; }
+.contact-body {
+  font-size: 15px; line-height: 1.8;
+  color: var(--muted); margin-bottom: 48px;
+}
+.contact-info { margin-bottom: 48px; }
+.contact-info-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 0; border-top: 1px solid var(--border);
+  font-size: 13px;
+}
+.contact-info-item:last-child { border-bottom: 1px solid var(--border); }
+.contact-info-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  min-width: 80px;
+}
+.contact-info-val { color: var(--white); }
+.contact-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.contact-right {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 48px;
+}
+.contact-form-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 3px;
+  color: var(--white); margin-bottom: 32px;
+}
+.form-group { margin-bottom: 20px; }
+.form-label {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 8px;
+}
+.form-input, .form-textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 300;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--gold);
+}
+.form-textarea { height: 120px; resize: none; }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 40px 60px;
+  display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 20px;
+}
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; letter-spacing: 4px;
+  color: var(--muted);
+}
+.footer-logo span { color: var(--gold); }
+.footer-copy { font-size: 12px; color: var(--muted); }
+.footer-socials { display: flex; gap: 20px; }
+.footer-social {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-social:hover { color: var(--gold); }
+
+/* SCROLL ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  nav { padding: 20px 24px; }
+  nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+  section { padding: 80px 24px; }
+  #home { padding: 60px 24px 60px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-right { align-items: flex-start; }
+  .about-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .work-grid { grid-template-columns: 1fr; }
+  .clients-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .cta-strip { padding: 40px 24px; }
+  footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+  .ticker { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#home" class="nav-logo">SURAJ<span>.</span>G</a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">Profile</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#clients">Client</a></li>
+    <li><a href="#contact">Contact Us</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="tickerTrack">
+    <span>Motion Graphics</span><span>·</span>
+    <span>Video Editing</span><span>·</span>
+    <span>2D Animation</span><span>·</span>
+    <span>AI Video Creation</span><span>·</span>
+    <span>Color Grading</span><span>·</span>
+    <span>Brand Films</span><span>·</span>
+    <span>Explainer Videos</span><span>·</span>
+    <span>Visual Storytelling</span><span>·</span>
+    <span>300+ Projects Delivered</span><span>·</span>
+    <span>Motion Graphics</span><span>·</span>
+    <span>Video Editing</span><span>·</span>
+    <span>2D Animation</span><span>·</span>
+    <span>AI Video Creation</span><span>·</span>
+    <span>Color Grading</span><span>·</span>
+    <span>Brand Films</span><span>·</span>
+    <span>Explainer Videos</span><span>·</span>
+    <span>Visual Storytelling</span><span>·</span>
+    <span>300+ Projects Delivered</span><span>·</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg-text">MOTION</div>
+  <div class="hero-inner">
+    <div class="hero-left reveal">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-dot"></div>
+        <span>Available for Work · Mumbai, India</span>
+      </div>
+      <h1 class="hero-h1">I CRAFT<br>VISUALS<br>THAT<br><em>MOVE</em><br>PEOPLE.</h1>
+      <p class="hero-sub">
+        <strong>Senior Motion Graphics Artist & Video Editor.</strong><br>
+        5+ Years · AI-Integrated Workflow · End-to-End Production.
+        I don't just edit — I direct, design, and deliver visuals that make people stop scrolling.
+      </p>
+      <div class="hero-btns">
+        <a href="#work" class="btn-primary">See My Work</a>
+        <a href="#contact" class="btn-secondary">Download Resume</a>
+      </div>
+    </div>
+    <div class="hero-right reveal" style="animation-delay:0.2s">
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">5+</div>
+          <div class="hero-stat-label">Years Exp.</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">300+</div>
+          <div class="hero-stat-label">Projects</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">10+</div>
+          <div class="hero-stat-label">Industries</div>
+        </div>
+      </div>
+      <div class="hero-roles">
+        <div class="hero-roles-title">What I Do</div>
+        <div class="role-item"><span class="role-num">01</span> Motion Graphics & Animation</div>
+        <div class="role-item"><span class="role-num">02</span> Video Editing & Color Grading</div>
+        <div class="role-item"><span class="role-num">03</span> AI Video Direction & Production</div>
+        <div class="role-item"><span class="role-num">04</span> Brand Films & Social Content</div>
+        <div class="role-item"><span class="role-num">05</span> Explainer Videos & 2D Animation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANIMATED TYPOGRAPHY BANNER -->
+<div class="type-banner">
+  <div class="type-banner-inner">
+    <span class="type-line">5 YEARS.</span>
+    <span class="type-line">300+ PROJECTS.</span>
+    <span class="type-line">ONE FRAME AT A TIME.</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <div class="profile-box">
+          <div class="profile-avatar"></div>
+          <div class="profile-name">SURAJ GUPTA</div>
+          <div class="profile-role">Senior Motion Graphic Artist · Video Editor</div>
+          <div class="profile-detail">Location <span>Mumbai, India</span></div>
+          <div class="profile-detail">Experience <span>5+ Years</span></div>
+          <div class="profile-detail">Current <span>D Design Studio</span></div>
+          <div class="profile-detail">Email <span>shreyashsg0@gmail.com</span></div>
+          <div class="profile-detail">Phone <span>+91 7348216508</span></div>
+        </div>
+        <a href="#contact" class="btn-primary" style="width:100%;text-align:center">Download Resume</a>
+      </div>
+      <div class="about-right reveal">
+        <div class="section-label">About Me</div>
+        <h2 class="section-h2">STORYTELLING<br>THROUGH MOTION.</h2>
+        <p class="about-body">
+          I'm a <strong>Senior Motion Graphic Artist and Video Editor</strong> with 5+ years of experience creating visuals that don't just look good — they <em>feel</em> like something.
+        </p>
+        <p class="about-body">
+          My work lives at the intersection of <strong>traditional post-production</strong> and <strong>next-generation AI filmmaking</strong>. From complex motion design and high-end color grading to full cinematic sequences built with AI video tools — I approach every project as a director, not just an editor.
+        </p>
+        <div class="about-highlight">
+          "Every project I touch is driven by one question: does this make someone feel something?"
+        </div>
+        <p class="about-body">
+          I've delivered <strong>300+ projects</strong> across agency, ed-tech, pharma, real estate, IT, e-commerce, beauty, and legal sectors — working with both domestic and international clients while mentoring junior designers and managing production pipelines end-to-end.
+        </p>
+
+        <div class="exp-timeline">
+          <div class="exp-title">Experience</div>
+          <div class="exp-item">
+            <div class="exp-year">2024 – NOW</div>
+            <div>
+              <div class="exp-company">D Design Studio Pvt. Ltd</div>
+              <div class="exp-role">Senior Motion Graphic Artist</div>
+              <div class="exp-desc">Motion graphics · Brand films · Social ads · Team mentoring · End-to-end production</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-year">2021 – 2023</div>
+            <div>
+              <div class="exp-company">GOLS Edtech Pvt. Ltd</div>
+              <div class="exp-role">2D Animator / Motion Graphic Artist</div>
+              <div class="exp-desc">E-learning content · Explainer videos · LMS animations · K-12 & corporate training</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-year">2020</div>
+            <div>
+              <div class="exp-company">Screentex India Pvt. Ltd</div>
+              <div class="exp-role">Graphics Designer Associate</div>
+              <div class="exp-desc">Print design · Digital assets · Social media · Event branding</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">My Toolkit</div>
+    <h2 class="section-h2 reveal">TRADITIONAL CRAFT.<br>EXPERIMENTAL EDGE.</h2>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <div class="skill-group-label">Post Production</div>
+        <div class="skill-tags">
+          <span class="skill-tag">After Effects</span>
+          <span class="skill-tag">Premiere Pro</span>
+          <span class="skill-tag">DaVinci Resolve</span>
+          <span class="skill-tag">Final Cut Pro</span>
+          <span class="skill-tag">Topaz Video AI</span>
+          <span class="skill-tag">Photoshop</span>
+          <span class="skill-tag">Illustrator</span>
+          <span class="skill-tag">Audition</span>
+          <span class="skill-tag">InDesign</span>
+          <span class="skill-tag">Character Animator</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">AI Video Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Runway Gen-3</span>
+          <span class="skill-tag">Kling</span>
+          <span class="skill-tag">Sora</span>
+          <span class="skill-tag">Pika</span>
+          <span class="skill-tag">Hailuo</span>
+          <span class="skill-tag">Seedance Pro</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">What I Deliver</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Motion Graphics</span>
+          <span class="skill-tag">2D Animation</span>
+          <span class="skill-tag">Color Grading</span>
+          <span class="skill-tag">Brand Films</span>
+          <span class="skill-tag">Explainer Videos</span>
+          <span class="skill-tag">Social Reels</span>
+          <span class="skill-tag">Green Screen</span>
+          <span class="skill-tag">Visual Effects</span>
+          <span class="skill-tag">Podcast Edit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-inner">
+    <div class="section-label">Selected Work</div>
+    <h2 class="section-h2 reveal">PROJECTS THAT<br>PUSH THE FRAME.</h2>
+    <div class="work-grid reveal">
+      <a href="#" class="project-card">
+        <span class="project-num">01</span>
+        <div class="project-label">Personal Project · 2024</div>
+        <div class="project-title">IMAGINED WORLDS</div>
+        <p class="project-desc">A cinematic AI video showcase — every frame AI-generated, every creative decision mine. Full concept, direction, editing, and color grading by me using a multi-tool AI pipeline.</p>
+        <div class="project-tags">
+          <span class="project-tag">Runway Gen-3</span>
+          <span class="project-tag">Kling</span>
+          <span class="project-tag">DaVinci Resolve</span>
+          <span class="project-tag">After Effects</span>
+        </div>
+        <div class="project-link">View on Behance →</div>
+      </a>
+      <a href="#" class="project-card">
+        <span class="project-num">02</span>
+        <div class="project-label">Personal Project · 2024</div>
+        <div class="project-title">SYNTHETIC VISIONS</div>
+        <p class="project-desc">A 64-second cinematic AI showreel exploring the boundaries of machine-made imagery and human-directed storytelling. Built from concept to final grade.</p>
+        <div class="project-tags">
+          <span class="project-tag">Sora</span>
+          <span class="project-tag">Hailuo</span>
+          <span class="project-tag">Seedance Pro</span>
+          <span class="project-tag">Premiere Pro</span>
+        </div>
+        <div class="project-link">View on Behance →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENT WORK -->
+<section id="clients">
+  <div class="section-inner">
+    <div class="clients-header">
+      <div>
+        <div class="section-label">Client Work</div>
+        <h2 class="section-h2 reveal">REAL BRIEFS.<br>REAL RESULTS.</h2>
+      </div>
+      <p style="max-width:340px;font-size:14px;color:var(--muted);line-height:1.7">
+        Motion graphics, brand films, and video content delivered for agencies and digital brands across 10+ industries.
+      </p>
+    </div>
+    <div class="clients-grid reveal">
+      <div class="client-card">
+        <div class="client-thumb"><span class="client-thumb-text">Video Thumbnail</span></div>
+        <div class="client-industry">Agency · Digital</div>
+        <div class="client-title">Adnet Video Teaser</div>
+        <div class="client-desc">High-energy brand teaser crafted for digital platforms — fast cuts, dynamic motion, and precision timing that drives engagement.</div>
+        <div class="client-tools">
+          <span class="client-tool">Premiere Pro</span>
+          <span class="client-tool">After Effects</span>
+        </div>
+      </div>
+      <div class="client-card">
+        <div class="client-thumb"><span class="client-thumb-text">Video Thumbnail</span></div>
+        <div class="client-industry">Ed-Tech · Corporate</div>
+        <div class="client-title">E-Learning Motion Series</div>
+        <div class="client-desc">Animated explainer videos and motion graphics for corporate training and K-12 learning platforms, integrated into LMS systems.</div>
+        <div class="client-tools">
+          <span class="client-tool">After Effects</span>
+          <span class="client-tool">Character Animator</span>
+          <span class="client-tool">Animate</span>
+        </div>
+      </div>
+      <div class="client-card">
+        <div class="client-thumb"><span class="client-thumb-text">Video Thumbnail</span></div>
+        <div class="client-industry">Brand · Social Media</div>
+        <div class="client-title">Social Media Content Pack</div>
+        <div class="client-desc">Short-form reels, motion graphics, and branded content built for social channels — optimized for platform performance and engagement.</div>
+        <div class="client-tools">
+          <span class="client-tool">Premiere Pro</span>
+          <span class="client-tool">After Effects</span>
+          <span class="client-tool">DaVinci Resolve</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="industries reveal">
+      <div class="ind-label">Industries Served</div>
+      <div class="ind-tags">
+        <span class="ind-tag">Agency</span>
+        <span class="ind-tag">Ed-Tech</span>
+        <span class="ind-tag">Pharma</span>
+        <span class="ind-tag">Real Estate</span>
+        <span class="ind-tag">IT & Software</span>
+        <span class="ind-tag">E-Commerce</span>
+        <span class="ind-tag">Beauty & Lifestyle</span>
+        <span class="ind-tag">Legal</span>
+        <span class="ind-tag">Automotive</span>
+        <span class="ind-tag">Corporate Training</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="cta-strip-h">WORKING ON SOMETHING?</div>
+  <p class="cta-strip-sub">Let's build something cinematic together.</p>
+  <a href="#contact" class="btn-dark">Let's Talk →</a>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <div class="section-label">Let's Connect</div>
+        <h2 class="section-h2">HAVE A PROJECT<br>IN MIND?</h2>
+        <p class="contact-body">
+          I'm open to full-time in-house roles, freelance projects, and creative collaborations. If you're building something that needs motion, story, and craft — I want to hear about it.
+        </p>
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <span class="contact-info-label">Email</span>
+            <span class="contact-info-val">shreyashsg0@gmail.com</span>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-label">Phone</span>
+            <span class="contact-info-val">+91 7348216508</span>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-label">Location</span>
+            <span class="contact-info-val">Mumbai, India</span>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-label">Status</span>
+            <span class="contact-info-val" style="color:var(--gold)">● Available for Work</span>
+          </div>
+        </div>
+        <div class="contact-btns">
+          <a href="mailto:shreyashsg0@gmail.com" class="btn-primary">Email Me</a>
+          <a href="#" class="btn-secondary">View Behance ↗</a>
+          <a href="#" class="btn-secondary">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="contact-right reveal">
+        <div class="contact-form-title">SEND A MESSAGE</div>
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" class="form-input" placeholder="John Doe"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="hello@company.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Project Type</label>
+          <input type="text" class="form-input" placeholder="Brand Film / Motion Graphics / Reel..."/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell me about your project..."></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%;border:none;cursor:pointer;font-size:12px">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SURAJ<span>.</span>G</div>
+  <div class="footer-copy">© 2025 Suraj Gupta · Motion Graphics & AI Video · Mumbai, India<br>Built with intention. Edited with obsession.</div>
+  <div class="footer-socials">
+    <a href="#" class="footer-social">LinkedIn</a>
+    <a href="#" class="footer-social">Behance</a>
+    <a href="#" class="footer-social">Instagram</a>
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 5 + 'px';
+  cursor.style.top = my - 5 + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx - 18 + 'px';
+  ring.style.top = ry - 18 + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
